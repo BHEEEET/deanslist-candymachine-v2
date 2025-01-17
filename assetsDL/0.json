@@ -1,0 +1,26 @@
+{
+    "name": "DeansList v2 #1",
+    "symbol": "DL v2",
+    "description": "Deanslist v2",
+    "image": "https://arweave.net/26YdhY_eAzv26YdhY1uu9uiA3nmDZYwP8MwZAultcE?ext=jpeg",
+    "external_url": "https://",
+    "attributes": [
+      {
+        "trait_type": "trait1",
+        "value": "value1"
+      },
+      {
+        "trait_type": "trait2",
+        "value": "value2"
+      }
+    ],
+    "properties": {
+      "files": [
+        {
+          "uri": "https://www.arweave.net/abcd5678?ext=png",
+          "type": "image/png"
+        }
+      ],
+      "category": "image"
+    }
+  }
