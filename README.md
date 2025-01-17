@@ -1,1 +1,1 @@
-# deanslist-candymachine
+# deanslist-core-candymachine
