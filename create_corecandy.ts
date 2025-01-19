@@ -24,7 +24,7 @@ import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, som
 
         console.log('Signer initialized with public key:', signer.publicKey);
 
-        const collectionMint = publicKey("8g5bFLRHA2SxZmNiqrYaUjzCDPwp1taGmc1YpznzWa4P");
+        const collectionMint = publicKey("6J9xzHz9QddxyaJ6VwzXHuXSvNoSokx2GfEVo92QCqCS");
         console.log('Using collection mint:', collectionMint);
 
         // Use the required plugins
@@ -37,18 +37,20 @@ import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, som
 
         console.log('Candy machine signer generated:', candyMachine.publicKey);
 
+        console.log('mint', umi.identity.publicKey)
+
         const createIx = await create(umi, {
             candyMachine,
             collection: collectionMint,
             collectionUpdateAuthority: umi.identity,
-            itemsAvailable: 15,
+            itemsAvailable: 16,
             authority: umi.identity.publicKey,
             isMutable: true,
             configLineSettings: some({
                 prefixName: 'DL v2 Test #',
-                nameLength: 15,
+                nameLength: 20,
                 prefixUri: 'https://gateway.irys.xyz/',
-                uriLength: 29,
+                uriLength: 90,
                 isSequential: false,
             }),
         });
