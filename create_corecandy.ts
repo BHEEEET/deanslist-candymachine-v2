@@ -24,7 +24,7 @@ import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, som
 
         console.log('Signer initialized with public key:', signer.publicKey);
 
-        const collectionMint = publicKey("FECV7f5heoUjrY2uMMfs5xCVSe8AtNJRVwR1VjQNKExq");
+        const collectionMint = publicKey("B6Uq5SqhCwdnLgbPnV7PxMabG8f6HNixUirhTvRfpeji");
         console.log('Using collection mint:', collectionMint);
 
         // Use the required plugins
