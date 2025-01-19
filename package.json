@@ -3,7 +3,8 @@
     "metadata": "ts-node ./create_metadata.ts",
     "collection": "ts-node ./create_collection.ts",
     "candy": "ts-node ./create_corecandy.ts",
-    "mint": "ts-node ./mint_nft.ts"
+    "mint": "ts-node ./mint_nft.ts",
+    "addconfig": "ts-node ./add_config_lines.ts"
   },
   "dependencies": {
     "@metaplex-foundation/mpl-core": "^1.1.1",
