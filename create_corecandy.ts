@@ -2,7 +2,7 @@
 import { create, mplCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { readFile } from 'fs/promises';
-import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, some } from '@metaplex-foundation/umi';
+import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, some,sol } from '@metaplex-foundation/umi';
 
 (async () => {
     try {
@@ -24,7 +24,7 @@ import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, som
 
         console.log('Signer initialized with public key:', signer.publicKey);
 
-        const collectionMint = publicKey("6J9xzHz9QddxyaJ6VwzXHuXSvNoSokx2GfEVo92QCqCS");
+        const collectionMint = publicKey("FECV7f5heoUjrY2uMMfs5xCVSe8AtNJRVwR1VjQNKExq");
         console.log('Using collection mint:', collectionMint);
 
         // Use the required plugins
@@ -38,6 +38,8 @@ import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, som
         console.log('Candy machine signer generated:', candyMachine.publicKey);
 
         console.log('mint', umi.identity.publicKey)
+
+        const destination = publicKey('GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f')
 
         const createIx = await create(umi, {
             candyMachine,
@@ -53,6 +55,10 @@ import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, som
                 uriLength: 90,
                 isSequential: false,
             }),
+            guards: {
+                botTax: some({ lamports: sol(0.01), lastInstruction: true }),
+                solPayment: some({ lamports: sol(0.1), destination: destination}),
+            }
         });
 
         console.log('Candy machine creation instruction prepared.');
