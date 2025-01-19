@@ -6,7 +6,7 @@ import { createSignerFromKeypair, publicKey, signerIdentity, some } from '@metap
 const RPC_ENDPOINT = 'https://api.devnet.solana.com';
 const WALLET_PATH = 'C:\\Users\\artis\\.config\\solana\\id.json'; // Update with your Windows username
 
-const candyMachine = publicKey('DRKFiJNJeg4FC8hYntWcbnDQi1gJdY3vHSjPL54gs28D');
+const candyMachine = publicKey('BVoUZULpjsdf3Gj3TqH64JmjrGumwLJpp63hTN21Xhkh');
 const metadatafile = './uploaded_metadata.json';
 
 
