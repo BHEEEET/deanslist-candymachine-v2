@@ -33,7 +33,7 @@ async function main() {
         await createCollection(umi, {
             collection: collectionSigner,
             name: 'Core DL v2 Devnet Test',
-            uri: "https://gateway.irys.xyz/84YN6fsi4vYnj4WDywT9aFBAo13s5yQcSsWQUbn3DEW1",
+            uri: "https://gateway.irys.xyz/GcQLh6Uq22oLXY4qicnH4bG4SJ3fqtF22PvgKmapYSR5",
             plugins: [
                 {
                     type: 'Royalties',
