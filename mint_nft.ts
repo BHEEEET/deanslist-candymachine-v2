@@ -4,7 +4,7 @@ import { setComputeUnitLimit } from "@metaplex-foundation/mpl-toolbox";
 import { readFile } from 'fs/promises';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { generateSigner, keypairIdentity } from "@metaplex-foundation/umi";
-import { createSignerFromKeypair, publicKey, signerIdentity, some } from '@metaplex-foundation/umi';
+import { createSignerFromKeypair, publicKey, signerIdentity, some ,sol} from '@metaplex-foundation/umi';
 import base58 from "bs58";
 
 const RPC_ENDPOINT = 'https://api.devnet.solana.com';
@@ -38,7 +38,7 @@ const mint = async () => {
             asset,
             collection: coreCollection,
             mintArgs: {
-                solPayment: some({ destination: destination }),
+                solPayment: some({lamports: sol(0.1), destination: destination }),
               },
         }).sendAndConfirm(umi);
 
