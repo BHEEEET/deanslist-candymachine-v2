@@ -5,11 +5,12 @@ import { readFile } from 'fs/promises';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { generateSigner, keypairIdentity } from "@metaplex-foundation/umi";
 import { createSignerFromKeypair, publicKey, signerIdentity, some } from '@metaplex-foundation/umi';
+import base58 from "bs58";
 
 const RPC_ENDPOINT = 'https://api.devnet.solana.com';
 const WALLET_PATH = 'C:\\Users\\artis\\.config\\solana\\id.json'; // Update with your Windows username
 
-const candyMachineId = publicKey("DRKFiJNJeg4FC8hYntWcbnDQi1gJdY3vHSjPL54gs28D");
+const candyMachineId = publicKey("BVoUZULpjsdf3Gj3TqH64JmjrGumwLJpp63hTN21Xhkh");
 const coreCollection = publicKey("6J9xzHz9QddxyaJ6VwzXHuXSvNoSokx2GfEVo92QCqCS");
 
 const mint = async () => {
@@ -30,16 +31,22 @@ const mint = async () => {
 
         const asset = generateSigner(umi);
 
-        await mintAssetFromCandyMachine(umi, {
+        const destination = publicKey('GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f')
+
+        const result = await mintV1(umi, {
             candyMachine: candyMachineId,
-            mintAuthority: umi.identity,
-            assetOwner: umi.identity.publicKey,
             asset,
             collection: coreCollection,
+            mintArgs: {
+                solPayment: some({ destination: destination }),
+              },
         }).sendAndConfirm(umi);
 
-        console.log('NFT Address:', asset);
-        console.log('View on Solscan:', `https://solscan.io/token/${asset}?cluster=devnet`);
+        const signature = base58.encode(result.signature)
+
+        console.log('View on Mint TX Solscan:', `https://explorer.solana.com/tx/${signature}?cluster=devnet`);
+        console.log('NFT Address:', asset.publicKey);
+        console.log('View on Solscan:', `https://solscan.io/token/${asset.publicKey}?cluster=devnet`);
 
     } catch (e) {
         console.error(e)
