@@ -5,7 +5,9 @@
     "candy": "ts-node ./create_corecandy.ts",
     "mint": "ts-node ./mint_nft.ts",
     "addconfig": "ts-node ./add_config_lines.ts",
-    "asset": "ts-node ./fetch_asset.ts"
+    "asset": "ts-node ./fetch_asset.ts",
+    "realms": "ts-node ./realms.ts",
+    "updt": "ts-node ./update_candy.ts"
   },
   "dependencies": {
     "@metaplex-foundation/mpl-core": "^1.1.1",
@@ -13,8 +15,10 @@
     "@metaplex-foundation/umi": "^1.0.0",
     "@metaplex-foundation/umi-bundle-defaults": "^1.0.0",
     "@metaplex-foundation/umi-uploader-irys": "^1.0.0",
+    "@solana/spl-governance": "^0.3.28",
     "@solana/web3.js": "1",
-    "bs58": "^6.0.0"
+    "bs58": "^6.0.0",
+    "governance-idl-sdk": "^0.0.4"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
