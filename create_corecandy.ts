@@ -1,8 +1,9 @@
 // Import necessary modules
-import { create, mplCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
+import { create, mplCandyMachine, getMerkleProof, getMerkleRoot } from '@metaplex-foundation/mpl-core-candy-machine';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { readFile } from 'fs/promises';
-import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, some,sol } from '@metaplex-foundation/umi';
+import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, some, sol, dateTime } from '@metaplex-foundation/umi';
+import bs58 from 'bs58'
 
 (async () => {
     try {
@@ -24,7 +25,7 @@ import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, som
 
         console.log('Signer initialized with public key:', signer.publicKey);
 
-        const collectionMint = publicKey("B6Uq5SqhCwdnLgbPnV7PxMabG8f6HNixUirhTvRfpeji");
+        const collectionMint = publicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
         console.log('Using collection mint:', collectionMint);
 
         // Use the required plugins
@@ -41,11 +42,19 @@ import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, som
 
         const destination = publicKey('GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f')
 
+        const CANDY = './candy.json'
+        const rawAllow = await readFile(CANDY, 'utf-8')
+        const allowList = JSON.parse(rawAllow)
+
+        const merkleRoot = getMerkleRoot(allowList);
+        const base58Root = bs58.encode(Uint8Array.from(merkleRoot));
+        console.log("Merkleroot (Base58):", base58Root);
+
         const createIx = await create(umi, {
             candyMachine,
             collection: collectionMint,
             collectionUpdateAuthority: umi.identity,
-            itemsAvailable: 16,
+            itemsAvailable: 50,
             authority: umi.identity.publicKey,
             isMutable: true,
             configLineSettings: some({
@@ -57,16 +66,16 @@ import { createSignerFromKeypair, generateSigner, publicKey, signerIdentity, som
             }),
             guards: {
                 botTax: some({ lamports: sol(0.01), lastInstruction: true }),
-                solPayment: some({ lamports: sol(0.1), destination: destination}),
+                solPayment: some({ lamports: sol(0.1), destination: destination }),
+                allowList: some({ merkleRoot: merkleRoot }),
+                startDate: some({ date: dateTime("2025-03-11T12:00:00.000Z") }),
+                endDate: some({ date: dateTime("2025-03-11T23:00:00.000Z") }),
             }
         });
 
         console.log('Candy machine creation instruction prepared.');
 
         const result = await createIx.sendAndConfirm(umi);
-
-        console.log('Transaction confirmed successfully!');
-        console.log('Transaction result:', result);
 
         const coreCandyMachine = candyMachine.publicKey;
         console.log('Core-Candy-Machine Address:', coreCandyMachine);
