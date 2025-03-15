@@ -11,8 +11,7 @@ async function main() {
         const RPC_ENDPOINT = 'https://api.devnet.solana.com'; // RPC endpoint for Solana Devnet
         const WALLET_PATH = 'C:\\Users\\artis\\.config\\solana\\id.json'; // Path to the wallet JSON file
 
-        const creator1 = publicKey('GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f')
-        const creator2 = publicKey('9SuQHwj9p6GDZMusnmqfXovaHxd9z3bQQn8e85fA5ue1')
+        const creator1 = publicKey('FThth1Uwkw1JJKMkKohpgiEshYKZojMpfhGHMf2rLZNR')
 
 
         // Load the default Solana wallet
@@ -32,7 +31,7 @@ async function main() {
         // Create the collection
         await createCollection(umi, {
             collection: collectionSigner,
-            name: 'Core DL v2 Devnet Test',
+            name: 'PERKS',
             uri: "https://gateway.irys.xyz/GcQLh6Uq22oLXY4qicnH4bG4SJ3fqtF22PvgKmapYSR5",
             plugins: [
                 {
@@ -41,11 +40,7 @@ async function main() {
                     creators: [
                         {
                             address: creator1,
-                            percentage: 20,
-                        },
-                        {
-                            address: creator2,
-                            percentage: 80,
+                            percentage: 100,
                         },
                     ],
                     ruleSet: ruleSet('None'), // Compatibility rule set
