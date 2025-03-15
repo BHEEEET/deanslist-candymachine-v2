@@ -40,7 +40,7 @@ import bs58 from 'bs58'
 
         console.log('mint', umi.identity.publicKey)
 
-        const destination = publicKey('GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f')
+        const destination = publicKey('FThth1Uwkw1JJKMkKohpgiEshYKZojMpfhGHMf2rLZNR')
 
         const CANDY = './candy.json'
         const rawAllow = await readFile(CANDY, 'utf-8')
