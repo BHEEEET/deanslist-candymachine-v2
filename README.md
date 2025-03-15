@@ -9,6 +9,48 @@ Follow these steps to set up and run the Deanslist Core Candymachine:
    - Check metadata
    - Check collection metadata
 
+Hashlip config:
+   ```ts
+   // General metadata for Ethereum
+const namePrefix = "PERK";
+const description = "Get your IslandDAO Perk";
+const baseUri = "https://gateway.irys.xyz/";
+
+const solanaMetadata = {
+  symbol: "PERKS",
+  seller_fee_basis_points: 500, // Define how much % you want from secondary market sales 500 = 5%
+  external_url: "https://x.com/deanslistDAO",
+  "creators": [
+    {
+      "address": "FThth1Uwkw1JJKMkKohpgiEshYKZojMpfhGHMf2rLZNR", // Dean's List DAO Strategic Reserve
+      "share": 100
+    }
+  ]
+};
+
+// If you have selected Solana then the collection starts from 0 automatically
+const layerConfigurations = [
+  {
+    growEditionSizeTo: 276,  // DRAGON
+    layersOrder: [
+      { name: "Backgrounds" },
+      { name: "DRAGON/Bases", options: { displayName: "Colour" } },
+      { name: "DRAGON/Hats", options: { displayName: "Hat" } },
+      {name: "DRAGON/Animal", options: {displayName: "Animal"}}
+    ],
+  },
+  {
+    growEditionSizeTo: 552,  // GOAT
+    layersOrder: [
+      { name: "Backgrounds" },
+      { name: "GOAT/Bases", options: { displayName: "Colour" } },
+      { name: "GOAT/Hats", options: { displayName: "Hat" } },
+      {name: "GOAT/Animal", options: {displayName: "Animal"}}
+    ],
+  },
+  ...
+   ```
+
 2. **Generate Metadata**
    - Change the parameters to the right ones
 
@@ -28,36 +70,36 @@ Follow these steps to set up and run the Deanslist Core Candymachine:
       yarn metadata
       ```
 
-1. **Create Collection**
+3. **Create Collection**
    ```sh
    yarn collection
    ```
    - Copy the `collection_id` and paste it into `create_corecady.ts`.
 
-2. **Create Candymachine**
+4. **Create Candymachine**
    ```sh
    yarn candy
    ```
    - Copy the `candymachine_id` and paste it into `add_config_lines.ts`.
 
-3. **Add Configuration Lines to Candy Machine**
+5. **Add Configuration Lines to Candy Machine**
    ```sh
    yarn addconfig
    ```
 
-4. **Mint NFTs**
+6. **Mint NFTs**
    ```sh
    yarn mint
    ```
 
-5. **Fetch Assets**
+7. **Fetch Assets**
    ```sh
    yarn asset
    ```
 
    - Get the `candyGuardId` and paste it in the **mintpage**
 
-6. **Update Candy Guards**
+8. **Update Candy Guards**
    ```sh
    yarn updt
    ```
